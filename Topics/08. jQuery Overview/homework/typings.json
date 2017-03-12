@@ -1,0 +1,8 @@
+{
+  "globalDependencies": {
+    "chai": "registry:dt/chai#3.4.0+20170217154556",
+    "handlebars": "registry:dt/handlebars#4.0.5+20170310072326",
+    "jquery": "registry:dt/jquery#1.10.0+20170310222111",
+    "mocha": "registry:dt/mocha#2.2.5+20170311011848"
+  }
+}
