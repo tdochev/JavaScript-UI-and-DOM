@@ -1,4 +1,4 @@
-/* globals $ */
+/* globals, document, module */
 
 /* 
 
@@ -17,8 +17,34 @@ Create a function that takes an id or DOM element and an array of contents
     * In that case, the content of the element **must not be** changed   
 */
 
-module.exports = function () {
+module.exports = 
+function solve() {
+    'use strict';
+    return function (element, contents) {
+        var div, fragment, currentDiv;
+        if (typeof element === 'string') {
+            element = document.getElementById(element);
+        }
+        if (!(element instanceof HTMLElement)) {
+            throw new Error('Provided first parameter is neither string or existing DOM element!');
+        }
 
-  return function (element, contents) {
-  };
-};
+        contents.forEach(function (el){
+            if (typeof el !== 'string' && typeof el !== 'number') {
+                throw new Error('Invalid array content!');
+            }
+        });
+        element.innerHTML = '';
+        div = document.createElement('div');
+        fragment = document.createDocumentFragment();
+        contents.forEach(function(el) {
+            if (typeof el !== 'string' && typeof el !== 'number') {
+                throw new Error('Invalid array content!');
+            }
+            currentDiv = div.cloneNode(true);
+            currentDiv.innerHTML = el;
+            fragment.appendChild(currentDiv);
+        });
+        element.appendChild(fragment);
+    };
+}
