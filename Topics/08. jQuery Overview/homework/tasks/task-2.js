@@ -18,9 +18,34 @@ Create a function that takes a selector and:
 
 */
 function solve() {
+  'use strict';
   return function (selector) {
-    
+    let $selected = $(selector);
+    if (typeof selector !== "string") {
+      throw new Error("Error");
+    }
+    if (!$selected instanceof $ || $selected.length < 1) {
+      throw new Error("Error");
+    }
+    $(".button").html("hide");
+    $selected.on("click", ".button", function () {
+      let $current = $(this);
+      let $button = $(this);
+      while ($current.length > 0) {
+        if ($current.hasClass("content")) {
+          if ($current.css("display") === "none") {
+            $current.css("display", "");
+            $button.html("hide");
+          } else {
+            $current.css("display", "none");
+            $button.html("show");
+          }
+          break;
+        }
+        $current = $current.next();
+      }
+    });
   };
-};
+}
 
 module.exports = solve;
